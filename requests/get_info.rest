@@ -1,0 +1,40 @@
+GET http://localhost:3001/api/persons 
+
+###
+GET http://localhost:3001/info
+
+###
+GET http://localhost:3001/api/persons/2
+
+###
+GET http://localhost:3001/api/persons/9
+
+###
+DELETE http://localhost:3001/api/persons/510
+
+###
+POST http://localhost:3001/api/persons/
+Content-Type: application/json
+
+{
+  "name": "Jonathan Anda",
+  "number": "01-241-3512"
+}
+
+###
+POST http://localhost:3001/api/persons/
+Content-Type: application/json
+
+{
+  "name": "Arto Hellas",
+  "number": "059-13-6431"
+}
+
+###
+POST http://localhost:3001/api/persons/
+Content-Type: application/json
+
+{
+  "name": "Mina Kosla",
+  "number": "059-13-6431"
+}
