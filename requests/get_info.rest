@@ -38,3 +38,12 @@ Content-Type: application/json
   "name": "Mina Kosla",
   "number": "059-13-6431"
 }
+
+###
+POST https://desolate-wave-51425.herokuapp.com/api/persons/
+Content-Type: application/json
+
+{
+  "name": "Mina Kosla",
+  "number": "059-13-6431"
+}
