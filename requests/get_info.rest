@@ -38,7 +38,7 @@ POST http://localhost:3001/api/persons/
 Content-Type: application/json
 
 {
-  "name": "Mina Kosla",
+  "name": "Mi",
   "number": "059-13-6431"
 }
 
@@ -47,6 +47,6 @@ POST https://desolate-wave-51425.herokuapp.com/api/persons/
 Content-Type: application/json
 
 {
-  "name": "Mina Kosla",
-  "number": "059-13-6431"
+  "name": "Minh",
+  # "number": "059-13-6431"
 }

@@ -2,12 +2,9 @@ require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const mongoose = require('mongoose')
 const Person = require('./models/persons')
 
 const app = express()
-
-const password = process.env.MONGO_PASSWORD
 
 app.use(express.static('build'))
 app.use(cors())
@@ -25,9 +22,9 @@ const requestLogger = (request, response, next) => {
 app.use(requestLogger)
 
 //---------- Morgan --------
-morgan.token('body', (req, res) => {
-  if (req.method === 'POST')
-    return JSON.stringify(req.body)
+morgan.token('body', (request) => {
+  if (request.method === 'POST')
+    return JSON.stringify(request.body)
   else
     return JSON.stringify()
 })
@@ -35,7 +32,7 @@ morgan.token('body', (req, res) => {
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 // let persons = [
-//       {    
+//       {
 //         name: "Arto Hellas",
 //         number: "01065064",
 //         id: 1
@@ -76,21 +73,21 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 // Get all people
 app.get('/api/persons', (request, response) => {
   // console.log(password)
-  Person.find({}).then(persons => {    
+  Person.find({}).then(persons => {
     // persons.forEach(person => {
     //   console.log(`${person.name} ${person.number}`)
-    // })    
+    // })
     response.json(persons)
-  })  
+  })
 })
 
 // Get people information
-app.get('/info', (request, response) => {  
-  Person.countDocuments().then(result => {    
+app.get('/info', (request, response) => {
+  Person.countDocuments().then(result => {
     response.send(`<p>Phonebook has info for ${result} people</p>
         <p>${Date()}</p>`)
-  }) 
-  
+  })
+
 })
 
 // Get a person with id
@@ -103,7 +100,7 @@ app.get('/api/persons/:id', (request, response, next) => {
       response.status(404).end()
     }
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 // Delete a person with id
@@ -147,10 +144,10 @@ app.post('/api/persons/', (request, response, next) => {
   })
 
   person.save().then(addedPerson => {
-    response.json(addedPerson)    
+    response.json(addedPerson)
   })
-  .catch(error => next(error))
-  
+    .catch(error => next(error))
+
 })
 
 //------- PUT -----------
@@ -163,10 +160,10 @@ app.put('/api/persons/:id', (request, response, next) => {
   }
 
   Person.findByIdAndUpdate(request.params.id, person, { new: true })
-  .then(updatedPerson => {
-    response.json(updatedPerson)
-  })
-  .catch(error => next(error))
+    .then(updatedPerson => {
+      response.json(updatedPerson)
+    })
+    .catch(error => next(error))
 })
 
 //------- Unknown endpoint --------
